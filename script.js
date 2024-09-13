@@ -2,66 +2,75 @@ document.addEventListener("DOMContentLoaded", function() {
     const imageElement = document.getElementById("animatedImage");
     const headlineElement = document.getElementById("headline");
     const subheadlineElement = document.getElementById("subheadline");
-    let currentImageIndex = 1;
     const totalImages = 48;
     const imagePath = "images_v3/";
-    let isAnimating = false;
-    let lastScrollTop = 0;
-    let ticking = false;
-    let lastDirection = 'down';
 
-    function updateImage(direction) {
-        if (direction === 'down' && currentImageIndex < totalImages) {
-            currentImageIndex++;
-        } else if (direction === 'up' && currentImageIndex > 1) {
-            currentImageIndex--;
-        }
-        const formattedIndex = String(currentImageIndex).padStart(4, '0');
-        const newSrc = `${imagePath}${formattedIndex}.webp`;
-        
-        // Check if the image loads successfully before updating
-        const tempImg = new Image();
-        tempImg.src = newSrc;
-        tempImg.onload = () => {
-            imageElement.src = newSrc;
-        };
-        tempImg.onerror = () => {
-            console.error(`Failed to load image: ${newSrc}`);
-        };
+    let currentImageIndex = 1;
+    let images = [];
+
+    // Preload images
+    for (let i = 1; i <= totalImages; i++) {
+        const img = new Image();
+        img.src = `${imagePath}${String(i).padStart(4, '0')}.webp`;
+        images.push(img);
     }
-    
 
- 
-
-    window.addEventListener('scroll', function() {
-        if (!ticking) {
-            window.requestAnimationFrame(function() {
-                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                const direction = scrollTop > lastScrollTop ? 'down' : 'up';
-                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-
-                if (!isAnimating && scrollTop < window.innerHeight) {
-                    if ((direction === 'down' && currentImageIndex < totalImages) ||
-                        (direction === 'up' && currentImageIndex > 1)) {
-                        isAnimating = true;
-                        animateImages(direction);
-                    }
-                }
-
-                ticking = false;
-            });
+    function updateHeadlines(progress) {
+        if (progress === 0) {
+            gsap.to(headlineElement, {duration: 0.5, opacity: 1, text: ""});
+            headlineElement.className = "technology";
+            gsap.to(subheadlineElement, {duration: 0.5, opacity: 1, text: ""});
+        } else if (progress === 1) {
+            gsap.to(headlineElement, {duration: 0.5, opacity: 1, text: ""});
+            headlineElement.className = "how-it-works";
+            gsap.to(subheadlineElement, {duration: 0.5, opacity: 0, text: ""});
+        } else {
+            gsap.to(headlineElement, {duration: 0.5, opacity: 0, text: ""});
+            gsap.to(subheadlineElement, {duration: 0.5, opacity: 0, text: ""});
         }
-        ticking = true;
+    }
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    let animationTriggered = false;
+    let currentAnimation = null;
+
+    ScrollTrigger.create({
+        trigger: "body",
+        start: "top top",
+        end: "+=100%",
+        onUpdate: (self) => {
+            if (!animationTriggered && self.progress > 0) {
+                animationTriggered = true;
+                playAnimation(1);
+            } else if (animationTriggered && self.direction !== self.getVelocity()) {
+                // Direction changed, reverse or play forward
+                playAnimation(self.direction);
+            }
+        }
     });
 
-    function animateImages(direction) {
-        const interval = setInterval(function() {
-            updateImage(direction);
-            if ((direction === 'down' && currentImageIndex >= totalImages) ||
-                (direction === 'up' && currentImageIndex <= 1)) {
-                clearInterval(interval);
-                isAnimating = false;
+    function playAnimation(direction) {
+        // Kill any existing animation
+        if (currentAnimation) currentAnimation.kill();
+
+        const startIndex = direction === 1 ? 0 : totalImages - 1;
+        const endIndex = direction === 1 ? totalImages - 1 : 0;
+
+        currentAnimation = gsap.to({}, {
+            duration: 2,
+            onUpdate: function() {
+                const progress = this.progress();
+                const imageIndex = Math.round(gsap.utils.interpolate(startIndex, endIndex, progress));
+                imageElement.src = images[imageIndex].src;
+                updateHeadlines(direction === 1 ? progress : 1 - progress);
+            },
+            onComplete: function() {
+                updateHeadlines(direction === 1 ? 1 : 0);
             }
-        }, 41.67); // Change image every 41.67ms for 24FPS
+        });
     }
+
+    // Initial setup
+    updateHeadlines(0);
 });
