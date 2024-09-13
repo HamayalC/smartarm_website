@@ -1,0 +1,71 @@
+html, body {
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    overflow-x: hidden;
+}
+
+#animatedImage {
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    margin: 0 auto;
+    object-fit: cover;
+}
+
+#headline {
+    position: absolute;
+    top: 90px;
+    left: 90px;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -3%;
+}
+
+#headline.technology {
+    font-size: 58px;
+    font-weight: bold;
+    color: white;
+}
+
+#headline.how-it-works {
+    font-size: 48px;
+    font-weight: 500;
+    color: white;
+}
+
+#subheadline {
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Inter', sans-serif;
+    font-size: 36px;
+    font-weight: 500;
+    color: white;
+    letter-spacing: -3%;
+    text-align: center;
+}
+
+#solutionSection {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('solution.png');
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+}
+
+#animationSection {
+    position: fixed;
+    top: 100vh;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 2;
+}
+

@@ -1,97 +1,57 @@
-console.clear();
+document.addEventListener("DOMContentLoaded", function() {
+    const imageElement = document.getElementById("animatedImage");
+    const headlineElement = document.getElementById("headline");
+    const subheadlineElement = document.getElementById("subheadline");
+    let currentImageIndex = 1;
+    const totalImages = 48;
+    const imagePath = "images_v3/";
+    let isAnimating = false;
+    let lastScrollTop = 0;
+    let ticking = false;
+    let lastDirection = 'down';
 
-const section1 = document.getElementById("section1");
+    function updateImage(direction) {
+        if (direction === 'down' && currentImageIndex < totalImages) {
+            currentImageIndex++;
+        } else if (direction === 'up' && currentImageIndex > 1) {
+            currentImageIndex--;
+        }
+        const formattedIndex = String(currentImageIndex).padStart(4, '0');
+        imageElement.src = `${imagePath}${formattedIndex}.webp`;
 
-const frameCount = 120;
-const currentFrame = index => (
-  `images4/${(index + 1).toString().padStart(4, '0')}.webp`
-);
+    }
 
-const images = [];
-const animation = {
-  frame: 0
-};
+ 
 
-for (let i = 0; i < frameCount; i++) {
-  const img = new Image();
-  img.src = currentFrame(i);
-  images.push(img);
-}
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            window.requestAnimationFrame(function() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const direction = scrollTop > lastScrollTop ? 'down' : 'up';
+                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
 
-const tl = gsap.timeline({ repeat: -1, yoyo: true, onUpdate: render });
-tl.to(animation, {
-  frame: frameCount - 1,
-  snap: "frame",
-  ease: "none",
-  duration: 5, // Adjust the duration as needed
-});
-
-images[0].onload = render;
-
-function render() {
-  section1.style.backgroundImage = `url(${images[animation.frame].src})`;
-}
-
-// Intersection Observer for section 2 text animation
-document.addEventListener('DOMContentLoaded', () => {
-    const section2 = document.getElementById('section2');
-    const centeredText = section2.querySelector('.centered-text');
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                centeredText.classList.add('visible');
-            } else {
-                centeredText.classList.remove('visible');
-            }
-        });
-    }, {
-        threshold: 0.1 // Adjust this threshold as needed
-    });
-
-    observer.observe(section2);
-    
-    // Intersection Observer for mission section text animation
-    const sectionMission = document.getElementById('section-mission');
-    const missionContent = sectionMission.querySelector('.mission-content');
-
-    const missionObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                missionContent.classList.add('visible');
-            } else {
-                missionContent.classList.remove('visible');
-            }
-        });
-    }, {
-        threshold: 0.1 // Adjust this threshold as needed
-    });
-
-    missionObserver.observe(sectionMission);
-    
-    // Register the TextPlugin with GSAP
-    gsap.registerPlugin(TextPlugin);
-
-    // Intersection Observer for meet sekai section text animation
-    const sectionMeetSekai = document.getElementById('section-meet-sekai');
-    const typedText = sectionMeetSekai.querySelector('.typed-text');
-
-    const sekaiObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                gsap.to(typedText, {
-                    duration: 2,
-                    text: "Meet Sekai.",
-                    ease: "none",
-                    onComplete: () => {
-                        typedText.classList.add('finished');
+                if (!isAnimating && scrollTop < window.innerHeight) {
+                    if ((direction === 'down' && currentImageIndex < totalImages) ||
+                        (direction === 'up' && currentImageIndex > 1)) {
+                        isAnimating = true;
+                        animateImages(direction);
                     }
-                });
-            }
-        });
-    }, {
-        threshold: 0.1 // Adjust this threshold as needed
+                }
+
+                ticking = false;
+            });
+        }
+        ticking = true;
     });
 
-    sekaiObserver.observe(sectionMeetSekai);
+    function animateImages(direction) {
+        const interval = setInterval(function() {
+            updateImage(direction);
+            if ((direction === 'down' && currentImageIndex >= totalImages) ||
+                (direction === 'up' && currentImageIndex <= 1)) {
+                clearInterval(interval);
+                isAnimating = false;
+            }
+        }, 41.67); // Change image every 41.67ms for 24FPS
+    }
 });
