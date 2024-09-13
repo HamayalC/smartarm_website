@@ -47,18 +47,6 @@ html, body {
     text-align: center;
 }
 
-#solutionSection {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-image: url('solution.png');
-    background-size: cover;
-    background-position: center;
-    z-index: 1;
-}
-
 #animationSection {
     position: fixed;
     top: 100vh;
