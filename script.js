@@ -17,9 +17,19 @@ document.addEventListener("DOMContentLoaded", function() {
             currentImageIndex--;
         }
         const formattedIndex = String(currentImageIndex).padStart(4, '0');
-        imageElement.src = `${imagePath}${formattedIndex}.webp`;
-
+        const newSrc = `${imagePath}${formattedIndex}.webp`;
+        
+        // Check if the image loads successfully before updating
+        const tempImg = new Image();
+        tempImg.src = newSrc;
+        tempImg.onload = () => {
+            imageElement.src = newSrc;
+        };
+        tempImg.onerror = () => {
+            console.error(`Failed to load image: ${newSrc}`);
+        };
     }
+    
 
  
 
