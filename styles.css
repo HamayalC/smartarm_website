@@ -1,0 +1,403 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+}
+
+section {
+  height: 100vh;
+  width: 100vw;
+  scroll-snap-align: start;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+#section-title {
+  background-color: black;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+#section-mission {
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+#container {
+  position: relative;
+}
+
+#text1 {
+  position: absolute;
+  top: -1.5em; /* Adjust as needed to position above text2 */
+  left: 0;
+  opacity: 1;
+  transition: opacity 1s;
+  text-align: left;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 47px;
+  letter-spacing: -0.04em; /* -4% letter spacing */
+}
+
+#text2 {
+  opacity: 0;
+  transition: opacity 1s;
+  font-family: "Inter", sans-serif;
+  font-weight: 500; /* Medium weight */
+  font-size: 100px;
+  letter-spacing: -0.06em; /* -5% letter spacing */
+  background: white;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  white-space: nowrap; /* Ensure the text stays on a single line */
+}
+
+.cursor {
+  display: inline-block;
+  width: 6px;
+  height: 1em;
+  background-color: white;
+  animation: blink 0.7s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.pitch-deck-title {
+  position: absolute;
+  top: 90px;
+  left: 90px;
+  font-family: "Inter", sans-serif;
+  font-weight: 500; /* Ensure this matches the loaded font weight */
+  font-size: 100px;
+  color: white;
+  margin: 0;
+  line-height: 110%;
+  letter-spacing: -0.06em; /* Adjusted letter spacing */
+}
+
+.logo-image {
+  position: absolute;
+  top: 325px; /* Adjust as needed */
+  left: 90px;
+  max-width: 200px; /* Adjust as needed */
+  height: auto;
+}
+#section-meet-sekai {
+  background: url("meet-sekai.webp") no-repeat center center;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#section-problem {
+  background: url("problem.webp") no-repeat center center;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#section-solution {
+  background: url("solution.webp") no-repeat center center;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#section-examples {
+  background-color: black;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  height: 100vh;
+  width: 100vw;
+}
+
+.highlights {
+  padding: 0px;
+  position: relative; /* Allow absolute positioning of the h1 */
+}
+
+h1 {
+  font-size: 40px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  color: white;
+  position: absolute;
+  left: 150px; /* Move the heading 50px away from the left */
+  top: calc(5%); /* Position 20px above the cards */
+}
+
+.cards-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 25px;
+  scroll-snap-type: x mandatory;
+  padding: 0 10px 10px 50vw; /* Add padding on the left side */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+  transform: translateY(10%); /* Move the cards 25% below the middle */
+}
+
+.cards-container::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+.card {
+  flex: 0 0 auto;
+  width: 80vw;
+  height: 70vh;
+  background-size: cover; /* Ensure the background image covers the entire card */
+  background-position: center; /* Center the background image */
+  padding: 20px;
+  border-radius: 26px;
+  scroll-snap-align: center; /* Snap to the center */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative; /* Allow absolute positioning of h2 */
+}
+
+.card img {
+  display: none; /* Hide the img element */
+}
+
+.card:nth-child(1) {
+  background-image: url("cooking.webp");
+}
+
+.card:nth-child(2) h2 {
+  color: black;
+}
+
+.card:nth-child(2) {
+  background-image: url("farming.webp");
+}
+
+.card:nth-child(3) {
+  background-image: url("working.webp");
+}
+
+.card h2 {
+  font-size: 30px;
+  font-weight: 500;
+  color: white;
+  margin: 0; /* Remove default margin */
+  position: absolute;
+  top: 50px;
+  left: 50px;
+}
+
+.card:first-child {
+  background-color: transparent;
+}
+
+#section-technology {
+  background-color: black;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+#technology-headline {
+  position: absolute;
+  top: 90px;
+  left: 90px;
+  font-family: "Inter", sans-serif;
+  letter-spacing: -3%;
+}
+
+#technology-headline.technology {
+  font-size: 58px;
+  font-weight: bold;
+  color: white;
+}
+
+#technology-headline.how-it-works {
+  font-size: 58px;
+  font-weight: bold;
+  color: white;
+}
+
+#technology-subheadline {
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Inter", sans-serif;
+  font-size: 36px;
+  font-weight: 500;
+  color: white;
+  letter-spacing: -3%;
+  text-align: center;
+}
+
+#section-dexterityos {
+  background: url("solution.webp") no-repeat center center;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#solution-image {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: scale(1);
+  transition: transform 2s ease-out;
+}
+
+#section-technology {
+  background-color: black;
+}
+
+#animated-image {
+  width: 100%;
+  height: 100%;
+  /* display: block; */
+  margin: 0 auto;
+  object-fit: cover;
+}
+
+#section-dexterityos {
+  background: white;
+}
+
+#section-app {
+  background: url("app.webp") no-repeat center center;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#section-market {
+  background: url("market.webp") no-repeat center center;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#section-model {
+  background: url("model.webp") no-repeat center center;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#section-value {
+  background: url("value.webp") no-repeat center center;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#section-traction {
+  background: url("traction.webp") no-repeat center center;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#section-press {
+  background: url("press.webp") no-repeat center center;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#section-team {
+  background: url("team.webp") no-repeat center center;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#section-roadmap {
+  background: url("roadmap.webp") no-repeat center center;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#section-fundraise {
+  background: url("fundraise.webp") no-repeat center center;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#section-thankyou {
+  background: url("thankyou.webp") no-repeat center center;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
