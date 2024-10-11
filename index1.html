@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centered Text in Full Viewport Section</title>
+
+    <!-- Google Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            scroll-snap-type: y mandatory; /* Enable vertical snap scrolling */
+            overflow-y: scroll; /* Ensure scrollable content */
+            font-family: 'Inter', sans-serif;
+        }
+
+        section {
+            height: 100vh; /* Full viewport height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            scroll-snap-align: start; /* Each section will snap to the start when scrolling */
+        }
+
+        /* First section */
+        .section-1 {
+            background-color: black;
+        }
+
+        .centered-text {
+            text-align: left;
+            width: 100%;
+            max-width: 1200px; /* Restrict maximum width */
+            padding: 50px;
+        }
+
+        h1 {
+            margin: 10px 0;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            line-height: 1.2;
+            letter-spacing: -0.03em;
+            font-size: clamp(24px, 5vw, 72px); /* Dynamic font size */
+        }
+
+        .centered-text h1 span {
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        /* Second section */
+        .section-2 {
+            background-color: #3498db; /* Example background color for the second section */
+            color: white;
+            font-size: 2rem;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- First Section -->
+    <section class="section-1">
+        <div class="centered-text">
+            <h1>
+                <span class="line-1">Hello Evan,</span><br>
+                <span class="line-2">Imagine redefining the</span><br>
+                <span class="line-3">boundaries of human capability.</span>
+            </h1>
+        </div>
+    </section>
+
+    <!-- Second Section -->
+    <section class="section-2">
+        <div>
+            <p>Welcome to the second section!</p>
+            <p>This section also takes up the full viewport height.</p>
+        </div>
+    </section>
+</body>
+</html>
