@@ -23,11 +23,12 @@
         }
 
         section {
-            height: 100dvh; /* Fallback for other browsers */
+            height: 100dvh; /* Full viewport height */
             display: flex;
             justify-content: center;
             align-items: center;
             scroll-snap-align: start; /* Snap scrolling */
+            position: relative; /* To position the arrow absolutely within the section */
         }
 
         /* First section */
@@ -57,9 +58,30 @@
             white-space: nowrap;
         }
 
+        /* Positioning the arrow */
+        .down-arrow {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: auto;
+            opacity: 0; /* Initially hidden */
+            animation: fadeIn 1s ease 2.5s forwards; /* Fade in animation after 2.5s */
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
         /* Second section */
         .section-2 {
-            background-color: #3498db; /* Example background color for the second section */
+            background-color: #3498db;
             color: white;
             font-size: 2rem;
         }
@@ -76,6 +98,8 @@
                 <span class="line-3">boundaries of human capability.</span>
             </h1>
         </div>
+        <!-- Down arrow, centered and appears after 2.5 seconds -->
+        <img src="arrow1.svg" alt="Down arrow" class="down-arrow">
     </section>
 
     <!-- Second Section -->
