@@ -23,12 +23,18 @@
         }
 
         section {
-            min-height: -webkit-fill-available; /* Full viewport height for iOS Safari */
-            min-height: 100vh; /* Fallback for other browsers */
+            min-height: 100vh; /* Full viewport height */
             display: flex;
             justify-content: center;
             align-items: center;
-            scroll-snap-align: start; /* Snap scrolling */
+            scroll-snap-align: start; /* Each section will snap to the start when scrolling */
+        }
+
+        /* Fix for mobile browsers with custom height */
+        @media (max-width: 768px) {
+            section {
+                min-height: calc(100vh - 3rem); /* Adjusts for Safari address bar */
+            }
         }
 
         /* First section */
