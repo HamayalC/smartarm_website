@@ -23,11 +23,12 @@
         }
 
         section {
-            height: 100vh; /* Full viewport height */
+            min-height: -webkit-fill-available; /* Full viewport height for iOS Safari */
+            min-height: 100vh; /* Fallback for other browsers */
             display: flex;
             justify-content: center;
             align-items: center;
-            scroll-snap-align: start; /* Each section will snap to the start when scrolling */
+            scroll-snap-align: start; /* Snap scrolling */
         }
 
         /* First section */
