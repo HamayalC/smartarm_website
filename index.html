@@ -56,6 +56,43 @@
         .centered-text h1 span {
             display: inline-block;
             white-space: nowrap;
+            opacity: 0; /* Start with invisible text */
+            animation: fadeWord 1s ease forwards;
+        }
+
+        /* Word-by-word fade-in with increasing delay */
+        .line-1 span:nth-child(1) {
+            animation-delay: 0.5s;
+        }
+        .line-1 span:nth-child(2) {
+            animation-delay: 1s;
+        }
+        .line-2 span:nth-child(1) {
+            animation-delay: 1.5s;
+        }
+        .line-2 span:nth-child(2) {
+            animation-delay: 2s;
+        }
+        .line-2 span:nth-child(3) {
+            animation-delay: 2.5s;
+        }
+        .line-3 span:nth-child(1) {
+            animation-delay: 3s;
+        }
+        .line-3 span:nth-child(2) {
+            animation-delay: 3.5s;
+        }
+        .line-3 span:nth-child(3) {
+            animation-delay: 4s;
+        }
+
+        @keyframes fadeWord {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
         }
 
         /* Positioning the arrow */
@@ -67,7 +104,7 @@
             width: 40px;
             height: auto;
             opacity: 0; /* Initially hidden */
-            animation: fadeIn 1s ease 2.5s forwards; /* Fade in animation after 2.5s */
+            animation: fadeIn 1s ease 5.5s forwards; /* Fade in animation after 2.5s */
         }
 
         @keyframes fadeIn {
@@ -93,9 +130,9 @@
     <section class="section-1">
         <div class="centered-text">
             <h1>
-                <span class="line-1">Hello Evan,</span><br>
-                <span class="line-2">Imagine redefining the</span><br>
-                <span class="line-3">boundaries of human capability.</span>
+                <span class="line-1"><span>Hello</span> <span>Evan,</span></span><br>
+                <span class="line-2"><span>Imagine</span> <span>redefining</span> <span>the</span></span><br>
+                <span class="line-3"><span>boundaries</span> <span>of</span> <span>human capability.</span></span>
             </h1>
         </div>
         <!-- Down arrow, centered and appears after 2.5 seconds -->
