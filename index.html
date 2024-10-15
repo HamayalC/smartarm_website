@@ -6,7 +6,7 @@
     <title>Centered Text in Full Viewport Section</title>
 
     <!-- Google Font Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&display=swap" rel="stylesheet">
 
     <style>
         * {
@@ -42,7 +42,6 @@
             max-width: 1200px; /* Restrict maximum width */
             padding-right: 50px;
             padding-left: 50px;
-            
         }
 
         h1 {
@@ -122,7 +121,70 @@
         .section-2 {
             background-color: white;
             color: black;
-            font-size: 2rem;
+            display: flex; /* Create a two-column layout */
+            align-items: center; /* Vertically center content */
+            justify-content: center;
+            height: 100dvh; /* Full viewport height */
+        }
+
+        .left-column {
+            width: 50%; /* Take up half of the width */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Vertically center text */
+            padding-left: 125px; /* Increase the padding from the left edge */
+            text-align: left; /* Align text to the left */
+        }
+
+        .left-column p {
+            font-size: clamp(34px, 5vw, 72px); /* Match font size dynamically with Section 1 */
+            line-height: 1.2; /* Same line-height as Section 1 */
+            letter-spacing: -0.03em; /* Same letter-spacing as Section 1 */
+            font-weight: 700; /* Set font weight to 700 */
+            margin: 10px 0; /* Same margin as Section 1 */
+        }
+
+        .left-column p span {
+            display: inline-block;
+        }
+
+        .right-column {
+            width: 50%; /* Take up half of the width */
+            display: flex;
+            justify-content: flex-end; /* Align items to the bottom */
+            align-items: flex-end; /* Align the image to the bottom */
+            height: 100%; /* Take up full height of the section */
+        }
+
+        .right-column img {
+            width: 100%; /* Image takes up the full width of the right column */
+            height: auto;
+            object-fit: contain; /* Ensure the image scales properly while keeping aspect ratio */
+        }
+
+        /* Media query for mobile view */
+  /* Media query for mobile view */
+        @media (max-width: 768px) {
+            .section-2 {
+                flex-direction: column; /* Stack columns vertically */
+            }
+
+            .left-column {
+                width: 100%; /* Make the left column take full width */
+                padding-left: 60px; /* Adjust left padding for mobile */
+                padding-right: 40px; /* Adjust right padding for mobile */
+                padding-top: 100px; /* Optional: add top padding */
+                padding-bottom: 20px; /* Optional: add bottom padding */
+            }
+
+            .right-column {
+                width: 100%; /* Ensure the image column takes full width */
+            }
+
+            .right-column img {
+                width: 100%; /* Ensure the image stays full width */
+                max-width: 100%;
+            }
         }
 
     </style>
@@ -143,8 +205,15 @@
 
     <!-- Second Section -->
     <section class="section-2">
-        <div>
-            <p>Coming soon.</p>
+        <div class="left-column">
+            <p>
+                <span>That's the</span><br>
+                <span>mission Sekai</span><br>
+                <span>sent us on.</span>
+            </p>
+        </div>        
+        <div class="right-column">
+            <img src="meet-sekai.png" alt="Meet Sekai">
         </div>
     </section>
 </body>
